@@ -1,0 +1,45 @@
+spring:  # Configurations for Spring Framework
+  datasource:  # Configurations for the database connection
+    url:   # The JDBC URL for the PostgreSQL database
+    username:   # The username for the database connection
+    password:   # The password for the database connection
+
+  jpa:  # Configurations for Java Persistence API (JPA)
+    hibernate:  # Configurations for Hibernate (the JPA implementation)
+      ddl-auto: create-drop  # Creates and drops the database schema on startup and shutdown respectively
+    properties:  # Additional Hibernate properties
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect  # The dialect for the PostgreSQL database
+        format_sql: true  # Enables pretty-printing of SQL queries
+    show-sql: true  # Enables logging of SQL queries
+    database: postgresql
+
+  mail: # Configurations for JavaMailSender (for sending emails)
+    host: smtp.gmail.com  # The hostname of the SMTP server
+    port: 587  # The port number of the SMTP server
+    username:   # The email address to be used as the sender
+    password:   # The app password for the email account
+    protocol: smtp  # The protocol to be used for the SMTP server
+    properties: # Additional JavaMail properties
+      mail:
+        smtp:
+          ssl:
+            trust: "*"  # Allows trusting any SSL certificate
+          auth: true  # Enables authentication
+          starttls:
+            enable: true  # Enables STARTTLS
+          connectiontimeout: 5000  # The connection timeout in milliseconds
+          timeout: 3000  # The I/O timeout in milliseconds
+          writetimeout: 5000  # The write timeout in milliseconds
+
+server:  # Configurations for the Spring Boot embedded server
+  servlet:
+    context-path: /api  # The context path for the application
+
+application:
+  security:
+    jwt:
+      secret-key: # 512 bit secret here
+      expiration: 86400000 # 1 day
+      refresh-token:
+        expiration: 604800000 # 7 days
